@@ -10,8 +10,7 @@ Sort the samples in the rack by
 * B) sort them in the same rack until they are in sorted order (in-place)
 
 ## Usage
-The script ("sort_samples.py") implements both methods (considering also the possibility of duplicate sample numbers). 
-The script can be run by placing it in the same directory as the Excel sheet and typing 
+The script ("sort_samples.py") implements both of these methods. It can be run by placing it in the same directory as the Excel file and typing 
 
 `./sample_sort.py <excel_filename>`
 
