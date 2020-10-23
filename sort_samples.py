@@ -5,12 +5,22 @@ import re
 import pandas as pd
 
 
+def print_overview(sorted_samples):
+
+    print('\nrack position <-- sample number')
+    for pos, sample in enumerate(sorted_samples):
+        print(f'{pos+1} <-- {"".join(sample[:3])}')
+
+
 def print_move(old_index, new_index):
     # print how to sort samples to achieve the correct order
     print(f'{old_index+1} --> {new_index+1}')
 
 
 def print_moves(sorted_samples, inplace):
+
+    print_overview(sorted_samples)
+    print('\nold position --> new position')
 
     if inplace:
        
@@ -108,7 +118,7 @@ if __name__ == '__main__':
     parser.add_argument('infile', metavar='input_file', type=str)
 
     parser.add_argument('--inplace', default=False, action='store_true',
-                        help='Show how to sort the samples in-place instead of' 'sorting them into a new rack')
+                        help='Show how to sort the samples in-place instead of sorting them into a new rack')
 
     args = parser.parse_args()
 
