@@ -22,12 +22,19 @@ additionally pass it the path to the directory where the Excel file sits:
 By default, method A is used and the output will look something like this:
 
 ```
-16 --> 1
-7 --> 2
-2 --> 3
-14 --> 4
-17 --> 5
-15 --> 6
+rack position <-- sample number
+1 <-- SE1403AA
+2 <-- SE1404AA
+3 <-- SE1404AA
+.
+.
+.
+
+old position --> new position
+14 --> 1
+16 --> 2
+17 --> 3
+2 --> 4
 .
 .
 .
@@ -42,12 +49,20 @@ For method B, run:
 ..., which will produce output looking like this:
 
 ```
-16 --> 1
-1 --> 12
-12 --> 9
-9 --> 16
-7 --> 2
-2 --> 3
+rack position <-- sample number
+1 <-- SE1403AA
+2 <-- SE1404AA
+3 <-- SE1404AA
+.
+.
+.
+
+old position --> new position
+14 --> 1
+1 --> 14
+16 --> 2
+2 --> 4
+4 --> 15
 .
 .
 .
