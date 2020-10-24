@@ -7,9 +7,9 @@ import pandas as pd
 
 def print_overview(sorted_samples):
 
-    print('\nrack position <-- sample number')
-    for pos, sample in enumerate(sorted_samples):
-        print(f'{pos+1} <-- {"".join(sample[:3])}')
+    print('\nrack position <-- sample ID')
+    for index, sample in enumerate(sorted_samples):
+        print(f'{index+1} <-- {"".join(sample[:3])}')
 
 
 def print_move(old_index, new_index):
@@ -66,7 +66,7 @@ def sample_type_order(sample_type):
     return type_order.index(sample_type)
 
 
-def sample_sort(samples, inplace):
+def sample_sort(samples):
 
     return sorted(samples, key=lambda sample: (sample_type_order(
                   sample[0]), sample[1], sample[2]))
@@ -104,8 +104,7 @@ def main(args):
 
         samples.append(sample)
 
-    sorted_samples = sample_sort(samples, args.inplace)
-
+    sorted_samples = sample_sort(samples)
     print_moves(sorted_samples, args.inplace)
 
 
