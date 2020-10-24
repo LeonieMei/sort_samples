@@ -22,7 +22,7 @@ additionally pass it the path to the directory where the Excel file sits:
 By default, method A is used and the output will look something like this:
 
 ```
-rack position <-- sample number
+rack position <-- sample ID
 1 <-- SE1403AA
 2 <-- SE1404AA
 3 <-- SE1404AA
