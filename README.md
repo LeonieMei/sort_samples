@@ -75,5 +75,7 @@ old position --> new position
 pandas
 
 ### Possible issues
-if pandas is not available, the script could be slightly adjusted to work with a `.tsv` instead of an `.xlsx` file
+* if pandas is not available, the script could be slightly adjusted to work with a `.tsv` instead of an `.xlsx` file
+* if "externe Nummer" is in a different format, the script won't warn you about it and will just ignore this sample
+
 
