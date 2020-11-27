@@ -6,18 +6,17 @@ import pandas as pd
 from operator import itemgetter
 
 
-def map_rack_pos(index):
+def map_rack_pos(index, args):
 
+    # add 1 so the index counting starts at 1 (and not at 0)
     index += 1
-
-    positions_per_rack_row = 45
 
     rack_letters = ["A", "B", "C", "D", "E"]
     # e.g. for A: 0, for B: 1 etc.
-    rack_letter_index = index//(positions_per_rack_row+1)
+    rack_letter_index = index//(args.positions_per_rack_row+1)
     rack_letter = rack_letters[rack_letter_index]
 
-    index -= rack_letter_index * positions_per_rack_row
+    index -= rack_letter_index * args.positions_per_rack_row
     if index<10:
         filler = '0'
     else:
@@ -25,24 +24,24 @@ def map_rack_pos(index):
     return f'{rack_letter}_{filler}{index}'
 
 
-def print_overview(sorted_samples):
+def print_overview(sorted_samples, args):
 
     print('\nrack position <-- sample ID')
     for index, sample in enumerate(sorted_samples):
-        print(f'{map_rack_pos(index)} <-- {"".join(sample[:1])}')
+        print(f'{map_rack_pos(index, args)} <-- {"".join(sample[:1])}')
 
 
-def print_move(old_index, new_index):
+def print_move(old_index, new_index, args):
     # print how to sort samples to achieve the correct order
-    print(f'{map_rack_pos(old_index)} --> {map_rack_pos(new_index)}')
+    print(f'{map_rack_pos(old_index, args)} --> {map_rack_pos(new_index, args)}')
 
 
-def print_moves(sorted_samples, inplace):
+def print_moves(sorted_samples, args):
 
-    print_overview(sorted_samples)
+    print_overview(sorted_samples, args)
     print('\nold position --> new position')
 
-    if inplace:
+    if args.inplace:
        
         check_sorting = [None] * len(sorted_samples) # check in the end if the sorting was done correctly
         mapping = {sample[1]: new_index for new_index, sample in enumerate(
@@ -51,7 +50,7 @@ def print_moves(sorted_samples, inplace):
         # process the first sample
         old_index = next(iter(mapping))  # get the first key of mapping
         new_index = mapping[old_index]
-        print_move(old_index, new_index)
+        print_move(old_index, new_index, args)
         check_sorting[new_index] = old_index
         del mapping[old_index]
 
@@ -66,7 +65,7 @@ def print_moves(sorted_samples, inplace):
                 new_index = mapping[old_index]
 
             if old_index!=new_index:
-                print_move(old_index, new_index)
+                print_move(old_index, new_index, args)
 
             check_sorting[new_index] = old_index
             del mapping[old_index]
@@ -77,7 +76,7 @@ def print_moves(sorted_samples, inplace):
     else:
         for new_index, sample in enumerate(sorted_samples):
             # sample[3] is the old index
-            print_move(sample[1], new_index)
+            print_move(sample[1], new_index, args)
 
 
 def sample_sort(samples):
@@ -103,7 +102,7 @@ def main(args):
         samples.append(sample)
 
     sorted_samples = sample_sort(samples)
-    print_moves(sorted_samples, args.inplace)
+    print_moves(sorted_samples, args)
 
 
 if __name__ == '__main__':
@@ -116,6 +115,8 @@ if __name__ == '__main__':
 
     parser.add_argument('--inplace', default=False, action='store_true',
                         help='Show how to sort the samples in-place instead of sorting them into a new rack')
+    parser.add_argument('--positions_per_rack_row', default=45, type=int,
+                        help='The number of positions per row in the given rack. Default=45.')
 
     args = parser.parse_args()
 
