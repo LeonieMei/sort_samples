@@ -95,8 +95,7 @@ def main(args):
     for i, row in df.iterrows():
 
         external_number = row[1]
-
-        sample = [external_number.strip(), index]
+        sample = (external_number.strip(), index)
         index += 1
 
         samples.append(sample)
