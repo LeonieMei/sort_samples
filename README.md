@@ -25,7 +25,7 @@ By default, method A is used and the output will look something like this:
 rack position <-- sample ID
 1 <-- SE1403AA
 2 <-- SE1404AA
-3 <-- SE1404AA
+3 <-- SE1405AA
 .
 .
 .
@@ -52,7 +52,7 @@ For method B, run:
 rack position <-- sample number
 1 <-- SE1403AA
 2 <-- SE1404AA
-3 <-- SE1404AA
+3 <-- SE1405AA
 .
 .
 .
